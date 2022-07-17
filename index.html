@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Logistic Regression</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Tatjana Kecojevic" />
+    <meta name="date" content="2022-07-17" />
+    <script src="libs/header-attrs/header-attrs.js"></script>
+    <link href="libs/remark-css/default.css" rel="stylesheet" />
+    <script src="libs/htmlwidgets/htmlwidgets.js"></script>
+    <script src="libs/jquery/jquery.min.js"></script>
+    <link href="libs/datatables-css/datatables-crosstalk.css" rel="stylesheet" />
+    <script src="libs/datatables-binding/datatables.js"></script>
+    <link href="libs/dt-core/css/jquery.dataTables.min.css" rel="stylesheet" />
+    <link href="libs/dt-core/css/jquery.dataTables.extra.css" rel="stylesheet" />
+    <script src="libs/dt-core/js/jquery.dataTables.min.js"></script>
+    <link href="libs/crosstalk/css/crosstalk.css" rel="stylesheet" />
+    <script src="libs/crosstalk/js/crosstalk.min.js"></script>
+    <link href="libs/font-awesome/css/fontawesome-all.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="assets/css/my-theme.css" type="text/css" />
+    <link rel="stylesheet" href="assets/css/my-fonts.css" type="text/css" />
+    <link rel="stylesheet" href="columns.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+
+
+
+
+layout: true
+
+&lt;a class="footer-link" href="http://tatjanakeco.rbind.io/"&gt;tatjanakeco.rbind.io&lt;/a&gt;
+
+---
+
+class: title-slide, center, bottom
+
+# Logistic Regression
+
+## Explained in 15 minutes
+
+### Tatjana Kecojevic
+
+---
+class: top, center
+background-image: url("images/background.png")
+background-size: cover
+background-color: #ffffff
+
+# .shadow-text[What if my response variable is categorical?]
+
+---
+# What is Logistic Regression?
+
+- &lt;span style="color:red"&gt;**Logistic regression**&lt;/span&gt;  is typically used as an extension of multiple regression, particularly adapted to situations where the dependent response variable, `\(Y\)`, is categorical and independent explanatory variables, `\(X_i\)`s, are continuous.
+
+- When categorical `\(Y\)` is dichotomous (2-outcomes): happy or sad
+
+  it is called &lt;span style="color:red"&gt;**Binomial**&lt;/span&gt; **Logistic Regression**
+
+- When `\(Y\)` has more than two attributes: general, academic and vocational
+
+  it is called &lt;span style="color:red"&gt;**Multinomial**&lt;/span&gt; **Logistic Regression**   
+
+- When `\(Y\)` categories can be ranked: low, middle, high
+
+  it is called &lt;span style="color:red"&gt;**Ordinal**&lt;/span&gt; **Logistic Regression**
+
+---
+# The Premise of Logistic Regression
+
+.pull-left[
+Logistic Regression is similar to OLS regression with the exception that it is **based on the independent variables prediction of** &lt;span style="color:red"&gt;**probabilities, odds, and the logarithm of the odds**&lt;/span&gt;**, for a categorical dependent variable `\(Y\)`**, rather than the prediction of specific values of a quantitative `\(Y\)`
+]
+
+.pull-right[
+*Example:*
+cost of the course ( `\(X_1\)` ) and the number of lab hours ( `\(X_2\)` ) become predictors of the “likelihood” of a dichotomous dependent response variable ( `\(Y\)` ) representing the biochemistry course satisfaction. 
+
+Note, that in a multiple regression analysis we would be predicting some quantitative variable.
+]
+
+---
+# Probabilities and odds
+
+Consider the following distribution of the biochemical course satisfaction for 400 students:  
+
+- satisfied = 188 
+- not-satisfy = 199
+
+The &lt;span style="color:red"&gt;**probability**&lt;/span&gt; of being a satisfy student would be simply the number of satify students (outcome of interest) expressed as a proportion to the total possible `$$P(S) = 188 / 400 =.47$$`
+
+
+The &lt;span style="color:red"&gt;**odds**&lt;/span&gt; would be the ratio of the probability `\(P(x)\)` to its compliment `\((1-P(x))\)`. Hence, the odds of being a satisfy student would be `$$P(S) /(1-P(S)) = .47/.53 = .89$$`
+
+---
+# The logarithm of the odds
+
+Unlike a linear regression, in which coefficients are easy to interpret, the estimates produced in the logistic model are less intuitive.
+
+The logarithm of the odds ratio is called the &lt;span style="color:red"&gt;**logit**&lt;/span&gt; and is simply the natural logarithm of the odds of being in that category.
+
+When observing the effect of a unit change in explanatory variable on predicting the outcome of `\(Y\)` we use the logit and we interpret it as the ratio of the odds of being classified in one category of the `\(Y\)` for two different values of the `\(X_i\)`.
+
+---
+class: top, center
+background-image: url("images/confused.png")
+background-size: cover
+background-color: #ffffff
+
+# .shadow-text[But Why... what is Logistic Regression?]
+
+---
+class: top, center
+background-image: url("images/example.png")
+background-size: cover
+background-color: #ffffff
+
+# .shadow-text[Simple,... please!]
+
+
+
+---
+class: top
+background-color: c("#FFFAF0", "#FFFFFF", "#FFFFFF")
+
+# Binomial Logistic Regression: Typical problems
+
+Often in studies, we encounter &lt;span style="color:red"&gt;**outcomes that are not continuous**&lt;/span&gt;, but instead &lt;span style="color:red"&gt;**fall into 1 of 2 categories**&lt;/span&gt;. The dependent response variable only has two categories. Generally, the occurrence of the event is coded as 1 and its absence as 0. In these cases we have binary outcomes, variables that can have only two possible values:
+
+- Measuring a performance labelled as good (1) or bad (0)
+- Assessment of the student success as passed (1) or failed (0)
+- Risk factor for cancer: person has cancer (1), or does not (0)
+- Whether a political candidate is going to win an election: lose (0), win (1) 
+- ‘Health’ of a business can be observed by monitoring the solvency of the firm: bankrupt (0), solvent (1)
+
+
+These are just a few of many examples where logistic regression methods are used to perform the prediction.
+
+---
+# How does it work?
+
+Let us examine one such example using data from Hosmer, Lemeshow, and Sturdivant (2013) on the association between age and coronary disease, available from 👉 https://github.com/TanjaKec/mydata/tree/master/CHDAGE.
+
+&lt;img src="images/CHDAGE.png" width="712" style="display: block; margin: auto;" /&gt;
+
+Data contains two variables: the age in years (AGE), and presence or absence of evidence of significant coronary heart disease (CHD) for 100 subjects in a hypothetical study of risk factors for heart disease.
+---
+## CHDAGE at first glance
+
+It is of interest to explore the relationship between AGE and the presence or absence of CHD in this group.
+
+It would be very attractive to be able to use the same modelling techniques as for linear models. We are going to do just that: fit a simple linear regression model to examine this relationship to see if it will work.
+
+`$$CHD = b_0 + b_1AGE$$`
+## .emphasis[BUT!!!]
+
+1) linear regression expects a numeric response variable and 
+
+2) we are interested in the analysis of the probability of a presence of CHD based on person's AGE
+---
+
+# Logistic Regression
+
+.pull-left[
+The vertical green line represents the age mean: 44,38 years old.
+
+The trend is very clear: as age increases, the amount of people diagnosed with coronary disease grows.
+
+- For people above the mean there more illness cases, while for people below the
+mean, the larger concentration is in the 0, “did not develop it”, category.   
+
+]
+
+.pull-right[
+&lt;img src="index_files/figure-html/unnamed-chunk-2-1.png" width="504" /&gt;
+
+]
+
+---
+### .emphasis[Glimpse at data]
+
+This summary table clearly shows there is an association between age and coronary disease: the higher the age, the higher the chance to develop coronary diseases.
+
+<div id="htmlwidget-f35abd8ae0e4d579c9eb" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-f35abd8ae0e4d579c9eb">{"x":{"filter":"none","data":[["1","2","3","4","5","6","7","8"],["20-29","30-34","35-39","40-44","45-49","50-54","55-59","60-69"],[9,13,9,10,7,3,4,2],[1,2,3,5,6,5,13,8],[10,15,12,15,13,8,17,10],[10,13,25,33,46,62,76,80]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Age_group<\/th>\n      <th>0<\/th>\n      <th>1<\/th>\n      <th>Total<\/th>\n      <th>Yes %<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":[2,3,4,5]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+
+
+---
+### .emphasis[Visualisation of data]
+
+.pull-left[
+We observe a positive correlation between age (axis X) and the probability to develop cardiac diseases (axis Y). 
+
+We need a regression model that will inform about:
+
+- the direction
+- magnitude and
+- the statistical significance level of this relationship
+]
+
+.pull-right[
+&lt;img src="index_files/figure-html/unnamed-chunk-4-1.png" width="504" /&gt;
+]
+---
+# OLS doesn't work
+
+As we can see the linear regression model does not work for this type of problem, for which we do not expect predictions that are off-scale values: below zero or above 1.
+
+Apart from the fact that the linear function given is unbounded, and hence cannot be used to model probability, the other assumptions of linear regression when dealing with this type of a problem are also not valid:
+
+- the relationship between `\(Y\)` and `\(X\)` is nonlinear
+- error terms are not normally distributed
+- the assumption of equal/constant variance (homoscedasticity) dos not hold
+
+.emphasis[A workaround these issues is to fit a different model, one that is bounded by the minimum and maximum probabilities. ]
+
+---
+# The logistic regression function
+
+.pull-left[
+It makes better sense to &lt;span style="color:red"&gt;**model the probabilities on a transformed scale**&lt;/span&gt; and this is what is done in &lt;span style="color:red"&gt;**logistic regression analysis**&lt;/span&gt;. 
+
+The relationship between the probability `\(p\)` and `\(X\)` can be presented by a &lt;span style="color:red"&gt;**logistic regression function**&lt;/span&gt;.
+
+
+The shape of the &lt;span style="color:red"&gt;**S-curve**&lt;/span&gt; given in the figure can be reproduced if we model the probabilities as follows
+
+`$$p = P(Y = 1 | X = x) = \frac{e^{\beta_0 + \beta_1x}}{1 + e^{\beta_0 + \beta_1x}},$$`
+
+where `\(e\)` is the base of the natural log.
+]
+
+.pull-right[
+&lt;img src="index_files/figure-html/unnamed-chunk-5-1.png" width="504" /&gt;
+]
+
+---
+### .emphasis[Mathy part... for those who like it 😁]
+
+The previous equation is called &lt;span style="color:red"&gt;**the logistic regression functions**&lt;/span&gt;. It is nonlinear in the parameters `\(\beta_0, \beta_1,... \beta_q\)`. However, it can be linearised by the **logit transformation**. Instead of working directly with `\(p\)` we work with a transformed value of `\(p\)`.
+
+If `\(p\)` is the probability of an event happening, the ratio `\(\frac{p}{(1-p)}\)` is called the &lt;span style="color:red"&gt;**odds ratio**&lt;/span&gt; for the event.
+
+By moving some terms around `\(1 - p = P(Y = 1 | X_1 = x_1) = \frac{1}{1 + e^{\beta_0 + \beta_1x_1}},\)`
+we get 
+
+`$$\frac{p}{1-p} = e^{\beta_0 + \beta_1x_1}$$`
+Taking the natural logarithm of both sides of the above expression, we obtain 
+`$$g(x_1) = log(\frac{p}{1-p}) = \beta_0 + \beta_1x_1$$`
+where the logarithm of the odds ratio is called the &lt;span style="color:red"&gt;**logit**&lt;/span&gt;. 
+
+---
+### .emphasis[The Generalised Linear Model] 
+
+Generalised linear models ( &lt;span style="color:red"&gt;GLMs&lt;/span&gt;) provide a very powerful and flexible framework for the application of regression models to a variety of non-normal response variables. GLMs consist of three main features:
+
+- **_An error distribution_** giving the distribution of the response around its mean. For analysis of variance and multiple regression this will be the normal; for logistic regression it is the binomial. 
+
+- **_A link function_**, `\(g\)`, that shows how the linear function of the explanatory variables is related to the expected value of the response: `\(g(\mu)=\beta_0 + \beta_1x_1.\)`
+For analysis of variance and multiple regression the link function is simply
+the identity function; in logistic regression it is the logit function.
+
+- **_The variance function_** that captures how the variance of the response variable depends on the mean.
+
+Estimation of the parameters in a GLM is usually achieved through a _maximum likelihood_ approach.
+
+---
+# Fitting a model
+
+```
+glm(formula = CHD ~ AGE, family = binomial(logit), data = CHDAGE)
+
+Coefficients:
+            Estimate Std. Error z value Pr(&gt;|z|)    
+(Intercept) -5.30945    1.13365  -4.683 2.82e-06 ***
+AGE          0.11092    0.02406   4.610 4.02e-06 ***
+```
+
+&lt;div class="flex" style="margin: 0 1em;"&gt;
+  &lt;div class="column"&gt;
+    &lt;img src="images/CHD_logReg.png" style="width: 100%;"&gt;
+  &lt;/div&gt;
+  
+---
+# Model interpretation
+
+The fitted logarithm of the odds ratio, i.e. logit of the probability `\(p\)` of the person develop cardiac diseases based on age is:
+
+`$$\hat{g}(Age) = -5.31 + 0.11*AGE$$`
+
+
+*An increase of 0.11 units is expected in the logit of CHD every time AGE increases by a year.*
+
+
+We can analyse the AGE's impact on the odds of CHD, by **getting the exponent of the coefficient itself**. In our example, the exponential of `\(0.11\)` is `\(1.12\)`. This means that for each additional year, an increase of `\(1.12\)` is expected in the chance of CHD occurring.
+
+
+
+Another way of interpreting the paameteres is to is to **estimate the percentage increase** in the chance of the occurrence of `\(Y\)`. To do so, one must subtract one unit from the exponentiated regression coefficient and multiply the result by 100, in our case (1.12 - 1) * 100. The increase of a year in person's age is associated with an increase of 12% in the chance of CHD occurring.
+
+```
+# The interpretation of the logistic regression’s coefficients may become a little more complicated when the chance is smaller than 1, that is, when the coefficient (\beta) is negative. One solution is to invert the coefficient (1/coefficient’s value), which makes the interpretation easier. For example, a coefficient of 0.11, when inverted, indicates that when the independent variable decreases by in one unit, an average increase of 9.10 is expected in the chance of the dependent variable occurring.
+
+Lastly, the analyst must validate the results observed with a subsample of
+its original dataset. This procedure gives the analysis more reliability,
+especially when working with small samples.
+```
+---
+# Model prediction
+
+To obtain the predicted probabilities we calculate:
+
+`$$\hat{p}(x) =\frac{1}{1 + e^{-(\hat{\beta_0} + \hat{\beta}_1x_1)}}$$`
+What is our estimated probability of developing coronary diseases at 67 year of age?
+
+`$$\hat{p}(x) =\frac{1}{1 + e^{-(-5.31 + 0.11*67)}}=\frac{1}{1 + e^{-(2.06)}}=0.89$$`
+A sixty seven year old person has a probability of 0.89 of developing coronary diseases.
+
+A tventy seven year old has a probability of 0.09 of developing coronary diseases.
+
+
+`$$\hat{p}(x) =\frac{1}{1 + e^{-(-5.31 + 0.11*27)}}=\frac{1}{1 + e^{-(-2.34)}}=0.09$$`
+
+---
+### .emphasis[Take Outs]
+
+- Logistic regression is a technique used when the dependent variable is categorical.
+
+- Logistic regression does not assume a linear relationship between the dependent and independent variables: Logistic regression assumes linearity of independent variables and log odds of dependent variable; Homoscedasticity is not required: The error terms (residuals) do not need to be normally distributed.
+
+- The dependent variable must be a dichotomous ( 2 categories) for the binary logistic regression. In that case, logistic regression employs binomial probability theory in which there are only two values to predict: that probability (p) is 1 rather than 0, i.e. the event/person belongs to one group rather than the other.
+
+- The logistic regression predicts group membership: Since logistic regression calculates the probability of success over the probability of failure, the results of the analysis are in the form of an odds ratio.
+
+- Logistic regression forms a best fitting equation or function using the maximum likelihood (ML) method, which maximizes the probability of classifying the observed data into the appropriate category given the regression coefficients.
+
+---
+class: freight-slide, center, middle, inverse
+
+# .shadow-text[To learn more visit: &lt;https://dataliteracy.rbind.io&gt;]
+
+.emphasis[To see it in action visit: &lt;http://covid19sr.rbind.io&gt;]
+
+[<i class="fab  fa-twitter "></i> @Tatjana_Kec](https://twitter.com/Tatjana_Kec)
+
+[<i class="fab  fa-github "></i> @TanjaKec](https://github.com/TanjaKec)
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "solarized-light",
+"highlightLanguage": ["r", "css", "yaml"],
+"slideNumberFormat": "",
+"highlightLines": true,
+"countIncrementalSlides": false,
+"ratio": "16:9"
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
