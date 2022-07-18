@@ -66,7 +66,7 @@ background-color: #ffffff
 ---
 # What is Logistic Regression?
 
-- <span style="color:red">**Logistic regression**</span>  is typically used as an extension of multiple regression, particularly adapted to situations where the dependent response variable, $Y$, is categorical and independent explanatory variables, $X_i$s, are continuous.
+- <span style="color:red">**Logistic regression**</span>  is typically used as an extension of multiple regression, particularly adapted to situations where the dependent response variable, $Y$, is categorical, and independent explanatory variables, $X_i$s, are continuous.
 
 - When categorical $Y$ is dichotomous (2-outcomes): happy or sad
 
@@ -84,14 +84,14 @@ background-color: #ffffff
 # The Premise of Logistic Regression
 
 .pull-left[
-Logistic Regression is similar to OLS regression with the exception that it is **based on the independent variables prediction of** <span style="color:red">**probabilities, odds, and the logarithm of the odds**</span>**, for a categorical dependent variable $Y$**, rather than the prediction of specific values of a quantitative $Y$
+Logistic Regression is similar to OLS regression with the exception that it is **based on the independent variables prediction of** <span style="color:red">**probabilities, odds, and the logarithm of the odds**</span>**, for a categorical dependent variable $Y$**, rather than the prediction of specific values of a quantitative $Y$.
 ]
 
 .pull-right[
 *Example:*
 cost of the course ( $X_1$ ) and the number of lab hours ( $X_2$ ) become predictors of the “likelihood” of a dichotomous dependent response variable ( $Y$ ) representing the biochemistry course satisfaction. 
 
-Note, that in a multiple regression analysis we would be predicting some quantitative variable.
+Note, that in a multiple regression analysis we would be predicting a quantitative variable.
 ]
 
 ---
@@ -100,12 +100,12 @@ Note, that in a multiple regression analysis we would be predicting some quantit
 Consider the following distribution of the biochemical course satisfaction for 400 students:  
 
 - satisfied = 188 
-- not-satisfy = 199
+- not-satisfied = 199
 
-The <span style="color:red">**probability**</span> of being a satisfy student would be simply the number of satify students (outcome of interest) expressed as a proportion to the total possible $$P(S) = 188 / 400 =.47$$
+The <span style="color:red">**probability**</span> of being a satisfied student would be simply the number of satisfied students (outcome of interest) expressed as a proportion to the total possible $$P(S) = 188 / 400 =.47$$
 
 
-The <span style="color:red">**odds**</span> would be the ratio of the probability $P(x)$ to its compliment $(1-P(x))$. Hence, the odds of being a satisfy student would be $$P(S) /(1-P(S)) = .47/.53 = .89$$
+The <span style="color:red">**odds**</span> would be the ratio of the probability $P(x)$ to its compliment $(1-P(x))$. Hence, the odds of being a satisfied student would be $$P(S) /(1-P(S)) = .47/.53 = .89$$
 
 ---
 # The logarithm of the odds
@@ -114,7 +114,7 @@ Unlike a linear regression, in which coefficients are easy to interpret, the est
 
 The logarithm of the odds ratio is called the <span style="color:red">**logit**</span> and is simply the natural logarithm of the odds of being in that category.
 
-When observing the effect of a unit change in explanatory variable on predicting the outcome of $Y$ we use the logit and we interpret it as the ratio of the odds of being classified in one category of the $Y$ for two different values of the $X_i$.
+When observing the effect of a unit change in an explanatory variable on predicting the outcome of $Y$ we use the logit and we interpret it as the ratio of the odds of being classified in one category of the $Y$ for two different values of the $X_i$.
 
 ---
 class: top, center
@@ -160,7 +160,7 @@ Let us examine one such example using data from Hosmer, Lemeshow, and Sturdivant
 knitr::include_graphics("images/CHDAGE.png")
 ```
 
-Data contains two variables: the age in years (AGE), and presence or absence of evidence of significant coronary heart disease (CHD) for 100 subjects in a hypothetical study of risk factors for heart disease.
+The data contains two variables: the age in years (AGE), and the presence or absence of evidence of significant coronary heart disease (CHD) for 100 subjects in a hypothetical study of risk factors for heart disease.
 ---
 ## CHDAGE at first glance
 
@@ -173,7 +173,7 @@ $$CHD = b_0 + b_1AGE$$
 
 1) linear regression expects a numeric response variable and 
 
-2) we are interested in the analysis of the probability of a presence of CHD based on person's AGE
+2) we are interested in the analysis of the probability of a presence of CHD based on a person's AGE
 ---
 
 # Logistic Regression
@@ -181,9 +181,9 @@ $$CHD = b_0 + b_1AGE$$
 .pull-left[
 The vertical green line represents the age mean: 44,38 years old.
 
-The trend is very clear: as age increases, the amount of people diagnosed with coronary disease grows.
+The trend is very clear: as age increases, the number of people diagnosed with coronary disease grows.
 
-- For people above the mean there more illness cases, while for people below the
+- For people above the mean there more cases of illness, while for people below the
 mean, the larger concentration is in the 0, “did not develop it”, category.   
 
 ]
@@ -208,7 +208,7 @@ abline(model_lm, lwd = 3, col = "navy")
 ---
 ### .emphasis[Glimpse at data]
 
-This summary table clearly shows there is an association between age and coronary disease: the higher the age, the higher the chance to develop coronary diseases.
+This summary table clearly shows there is an association between age and coronary disease: the higher the age, the higher the chance of developing coronary diseases.
 
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 suppressPackageStartupMessages(library(tidyverse))
@@ -249,12 +249,12 @@ DT::datatable(tb1)
 ### .emphasis[Visualisation of data]
 
 .pull-left[
-We observe a positive correlation between age (axis X) and the probability to develop cardiac diseases (axis Y). 
+We observe a positive correlation between age (axis X) and the probability of developing cardiac diseases (axis Y). 
 
 We need a regression model that will inform about:
 
 - the direction
-- magnitude and
+- the magnitude and
 - the statistical significance level of this relationship
 ]
 
@@ -277,7 +277,7 @@ Apart from the fact that the linear function given is unbounded, and hence canno
 
 - the relationship between $Y$ and $X$ is nonlinear
 - error terms are not normally distributed
-- the assumption of equal/constant variance (homoscedasticity) dos not hold
+- the assumption of equal/constant variance (homoscedasticity) does not hold
 
 .emphasis[A workaround these issues is to fit a different model, one that is bounded by the minimum and maximum probabilities. ]
 
@@ -331,7 +331,7 @@ where the logarithm of the odds ratio is called the <span style="color:red">**lo
 ---
 ### .emphasis[The Generalised Linear Model] 
 
-Generalised linear models ( <span style="color:red">GLMs</span>) provide a very powerful and flexible framework for the application of regression models to a variety of non-normal response variables. GLMs consist of three main features:
+Generalised linear models (<span style="color:red">GLMs</span>) provide a very powerful and flexible framework for the application of regression models to a variety of non-normal response variables. GLMs consist of three main features:
 
 - **_An error distribution_** giving the distribution of the response around its mean. For analysis of variance and multiple regression this will be the normal; for logistic regression it is the binomial. 
 
@@ -384,7 +384,7 @@ In a logistic regression, the exponential of a positive value (+) produces a
 coefficient larger than 1. Conversely, a negative coefficient (-) returns a Exp(\beta) smaller than 1. A coefficient with a value of zero produces an Exp(\beat) equal to 1, indicating that the independent variable does not affect the chance of the dependent variable’s occurrence. In other words, the farther the coefficient is from one, regardless of the direction, the greater the impact of a given independent variable on the chance of the event of interest occurring
 ```
 
-Another way of interpreting the paameteres is to is to **estimate the percentage increase** in the chance of the occurrence of $Y$. To do so, one must subtract one unit from the exponentiated regression coefficient and multiply the result by 100, in our case (1.12 - 1) * 100. The increase of a year in person's age is associated with an increase of 12% in the chance of CHD occurring.
+Another way of interpreting the parameters is to is to **estimate the percentage increase** in the chance of the occurrence of $Y$. To do so, one must subtract one unit from the exponentiated regression coefficient and multiply the result by 100, in our case (1.12 - 1) * 100. The increase of a year in a person's age is associated with an increase of 12% in the chance of CHD occurring.
 
 ```
 # The interpretation of the logistic regression’s coefficients may become a little more complicated when the chance is smaller than 1, that is, when the coefficient (\beta) is negative. One solution is to invert the coefficient (1/coefficient’s value), which makes the interpretation easier. For example, a coefficient of 0.11, when inverted, indicates that when the independent variable decreases by in one unit, an average increase of 9.10 is expected in the chance of the dependent variable occurring.
