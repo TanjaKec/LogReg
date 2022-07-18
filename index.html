@@ -75,7 +75,7 @@ background-color: #ffffff
   it is called &lt;span style="color:red"&gt;**Ordinal**&lt;/span&gt; **Logistic Regression**
 
 ---
-# The Premise of Logistic Regression
+### .emphasis[The Premise of Logistic Regression]
 
 .pull-left[
 Logistic Regression is similar to OLS regression with the exception that it is **based on the independent variables prediction of** &lt;span style="color:red"&gt;**probabilities, odds, and the logarithm of the odds**&lt;/span&gt;**, for a categorical dependent variable `\(Y\)`**, rather than the prediction of specific values of a quantitative `\(Y\)`.
@@ -89,7 +89,7 @@ Note, that in a multiple regression analysis we would be predicting a quantitati
 ]
 
 ---
-# Probabilities and odds
+### .emphasis[Probabilities and odds]
 
 Consider the following distribution of the biochemical course satisfaction for 400 students:  
 
@@ -102,7 +102,7 @@ The &lt;span style="color:red"&gt;**probability**&lt;/span&gt; of being a satisf
 The &lt;span style="color:red"&gt;**odds**&lt;/span&gt; would be the ratio of the probability `\(P(x)\)` to its compliment `\((1-P(x))\)`. Hence, the odds of being a satisfied student would be `$$P(S) /(1-P(S)) = .47/.53 = .89$$`
 
 ---
-# The logarithm of the odds
+### .emphasis[The logarithm of the odds]
 
 Unlike a linear regression, in which coefficients are easy to interpret, the estimates produced in the logistic model are less intuitive.
 
@@ -132,7 +132,7 @@ background-color: #ffffff
 class: top
 background-color: c("#FFFAF0", "#FFFFFF", "#FFFFFF")
 
-# Binomial Logistic Regression: Typical problems
+### .emphasis[Binomial Logistic Regression: Typical problems]
 
 Often in studies, we encounter &lt;span style="color:red"&gt;**outcomes that are not continuous**&lt;/span&gt;, but instead &lt;span style="color:red"&gt;**fall into 1 of 2 categories**&lt;/span&gt;. The dependent response variable only has two categories. Generally, the occurrence of the event is coded as 1 and its absence as 0. In these cases we have binary outcomes, variables that can have only two possible values:
 
@@ -146,7 +146,7 @@ Often in studies, we encounter &lt;span style="color:red"&gt;**outcomes that are
 These are just a few of many examples where logistic regression methods are used to perform the prediction.
 
 ---
-# How does it work?
+### .emphasis[How does it work?]
 
 Let us examine one such example using data from Hosmer, Lemeshow, and Sturdivant (2013) on the association between age and coronary disease, available from 👉 https://github.com/TanjaKec/mydata/tree/master/CHDAGE.
 
@@ -154,7 +154,7 @@ Let us examine one such example using data from Hosmer, Lemeshow, and Sturdivant
 
 The data contains two variables: the age in years (AGE), and the presence or absence of evidence of significant coronary heart disease (CHD) for 100 subjects in a hypothetical study of risk factors for heart disease.
 ---
-## CHDAGE at first glance
+### CHDAGE at first glance
 
 It is of interest to explore the relationship between AGE and the presence or absence of CHD in this group.
 
@@ -190,8 +190,8 @@ mean, the larger concentration is in the 0, “did not develop it”, category.
 
 This summary table clearly shows there is an association between age and coronary disease: the higher the age, the higher the chance of developing coronary diseases.
 
-<div id="htmlwidget-527a85bc167c0b208cc9" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-527a85bc167c0b208cc9">{"x":{"filter":"none","data":[["1","2","3","4","5","6","7","8"],["20-29","30-34","35-39","40-44","45-49","50-54","55-59","60-69"],[9,13,9,10,7,3,4,2],[1,2,3,5,6,5,13,8],[10,15,12,15,13,8,17,10],[10,13,25,33,46,62,76,80]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Age_group<\/th>\n      <th>0<\/th>\n      <th>1<\/th>\n      <th>Total<\/th>\n      <th>Yes %<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":[2,3,4,5]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-fa6cab56d720e8d072b5" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-fa6cab56d720e8d072b5">{"x":{"filter":"none","data":[["1","2","3","4","5","6","7","8"],["20-29","30-34","35-39","40-44","45-49","50-54","55-59","60-69"],[9,13,9,10,7,3,4,2],[1,2,3,5,6,5,13,8],[10,15,12,15,13,8,17,10],[10,13,25,33,46,62,76,80]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Age_group<\/th>\n      <th>0<\/th>\n      <th>1<\/th>\n      <th>Total<\/th>\n      <th>Yes %<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":[2,3,4,5]},{"orderable":false,"targets":0}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 
 
 ---
@@ -211,7 +211,7 @@ We need a regression model that will inform about:
 &lt;img src="index_files/figure-html/unnamed-chunk-4-1.png" width="504" /&gt;
 ]
 ---
-# OLS doesn't work
+### .emphasis[OLS doesn't work]
 
 As we can see the linear regression model does not work for this type of problem, for which we do not expect predictions that are off-scale values: below zero or above 1.
 
@@ -224,7 +224,7 @@ Apart from the fact that the linear function given is unbounded, and hence canno
 .emphasis[A workaround these issues is to fit a different model, one that is bounded by the minimum and maximum probabilities. ]
 
 ---
-# The logistic regression function
+### .emphasis[The logistic regression function]
 
 .pull-left[
 It makes better sense to &lt;span style="color:red"&gt;**model the probabilities on a transformed scale**&lt;/span&gt; and this is what is done in &lt;span style="color:red"&gt;**logistic regression analysis**&lt;/span&gt;. 
@@ -274,7 +274,7 @@ the identity function; in logistic regression it is the logit function.
 Estimation of the parameters in a GLM is usually achieved through a _maximum likelihood_ approach.
 
 ---
-# Fitting a model
+### .emphasis[Fitting a model]
 
 ```
 glm(formula = CHD ~ AGE, family = binomial(logit), data = CHDAGE)
@@ -291,7 +291,7 @@ AGE          0.11092    0.02406   4.610 4.02e-06 ***
   &lt;/div&gt;
   
 ---
-# Model interpretation
+### .emphasis[Model interpretation]
 
 The fitted logarithm of the odds ratio, i.e. logit of the probability `\(p\)` of the person develop cardiac diseases based on age is:
 
@@ -307,15 +307,9 @@ We can analyse the AGE's impact on the odds of CHD, by **getting the exponent of
 
 Another way of interpreting the parameters is to is to **estimate the percentage increase** in the chance of the occurrence of `\(Y\)`. To do so, one must subtract one unit from the exponentiated regression coefficient and multiply the result by 100, in our case (1.12 - 1) * 100. The increase of a year in a person's age is associated with an increase of 12% in the chance of CHD occurring.
 
-```
-# The interpretation of the logistic regression’s coefficients may become a little more complicated when the chance is smaller than 1, that is, when the coefficient (\beta) is negative. One solution is to invert the coefficient (1/coefficient’s value), which makes the interpretation easier. For example, a coefficient of 0.11, when inverted, indicates that when the independent variable decreases by in one unit, an average increase of 9.10 is expected in the chance of the dependent variable occurring.
 
-Lastly, the analyst must validate the results observed with a subsample of
-its original dataset. This procedure gives the analysis more reliability,
-especially when working with small samples.
-```
 ---
-# Model prediction
+### .emphasis[Model prediction]
 
 To obtain the predicted probabilities we calculate:
 

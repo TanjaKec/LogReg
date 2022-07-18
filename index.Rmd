@@ -81,7 +81,7 @@ background-color: #ffffff
   it is called <span style="color:red">**Ordinal**</span> **Logistic Regression**
 
 ---
-# The Premise of Logistic Regression
+### .emphasis[The Premise of Logistic Regression]
 
 .pull-left[
 Logistic Regression is similar to OLS regression with the exception that it is **based on the independent variables prediction of** <span style="color:red">**probabilities, odds, and the logarithm of the odds**</span>**, for a categorical dependent variable $Y$**, rather than the prediction of specific values of a quantitative $Y$.
@@ -95,7 +95,7 @@ Note, that in a multiple regression analysis we would be predicting a quantitati
 ]
 
 ---
-# Probabilities and odds
+### .emphasis[Probabilities and odds]
 
 Consider the following distribution of the biochemical course satisfaction for 400 students:  
 
@@ -108,7 +108,7 @@ The <span style="color:red">**probability**</span> of being a satisfied student 
 The <span style="color:red">**odds**</span> would be the ratio of the probability $P(x)$ to its compliment $(1-P(x))$. Hence, the odds of being a satisfied student would be $$P(S) /(1-P(S)) = .47/.53 = .89$$
 
 ---
-# The logarithm of the odds
+### .emphasis[The logarithm of the odds]
 
 Unlike a linear regression, in which coefficients are easy to interpret, the estimates produced in the logistic model are less intuitive.
 
@@ -138,7 +138,7 @@ background-color: #ffffff
 class: top
 background-color: c("#FFFAF0", "#FFFFFF", "#FFFFFF")
 
-# Binomial Logistic Regression: Typical problems
+### .emphasis[Binomial Logistic Regression: Typical problems]
 
 Often in studies, we encounter <span style="color:red">**outcomes that are not continuous**</span>, but instead <span style="color:red">**fall into 1 of 2 categories**</span>. The dependent response variable only has two categories. Generally, the occurrence of the event is coded as 1 and its absence as 0. In these cases we have binary outcomes, variables that can have only two possible values:
 
@@ -152,7 +152,7 @@ Often in studies, we encounter <span style="color:red">**outcomes that are not c
 These are just a few of many examples where logistic regression methods are used to perform the prediction.
 
 ---
-# How does it work?
+### .emphasis[How does it work?]
 
 Let us examine one such example using data from Hosmer, Lemeshow, and Sturdivant (2013) on the association between age and coronary disease, available from 👉 https://github.com/TanjaKec/mydata/tree/master/CHDAGE.
 
@@ -162,7 +162,7 @@ knitr::include_graphics("images/CHDAGE.png")
 
 The data contains two variables: the age in years (AGE), and the presence or absence of evidence of significant coronary heart disease (CHD) for 100 subjects in a hypothetical study of risk factors for heart disease.
 ---
-## CHDAGE at first glance
+### CHDAGE at first glance
 
 It is of interest to explore the relationship between AGE and the presence or absence of CHD in this group.
 
@@ -269,7 +269,7 @@ tb1 %>% ggplot(aes(x = Age_group, y = tb1$"Yes %", fill = "red")) +
 ```
 ]
 ---
-# OLS doesn't work
+### .emphasis[OLS doesn't work]
 
 As we can see the linear regression model does not work for this type of problem, for which we do not expect predictions that are off-scale values: below zero or above 1.
 
@@ -282,7 +282,7 @@ Apart from the fact that the linear function given is unbounded, and hence canno
 .emphasis[A workaround these issues is to fit a different model, one that is bounded by the minimum and maximum probabilities. ]
 
 ---
-# The logistic regression function
+### .emphasis[The logistic regression function]
 
 .pull-left[
 It makes better sense to <span style="color:red">**model the probabilities on a transformed scale**</span> and this is what is done in <span style="color:red">**logistic regression analysis**</span>. 
@@ -344,7 +344,7 @@ the identity function; in logistic regression it is the logit function.
 Estimation of the parameters in a GLM is usually achieved through a _maximum likelihood_ approach.
 
 ---
-# Fitting a model
+### .emphasis[Fitting a model]
 
 ```
 glm(formula = CHD ~ AGE, family = binomial(logit), data = CHDAGE)
@@ -361,7 +361,7 @@ AGE          0.11092    0.02406   4.610 4.02e-06 ***
   </div>
   
 ---
-# Model interpretation
+### .emphasis[Model interpretation]
 
 The fitted logarithm of the odds ratio, i.e. logit of the probability $p$ of the person develop cardiac diseases based on age is:
 
@@ -386,15 +386,13 @@ coefficient larger than 1. Conversely, a negative coefficient (-) returns a Exp(
 
 Another way of interpreting the parameters is to is to **estimate the percentage increase** in the chance of the occurrence of $Y$. To do so, one must subtract one unit from the exponentiated regression coefficient and multiply the result by 100, in our case (1.12 - 1) * 100. The increase of a year in a person's age is associated with an increase of 12% in the chance of CHD occurring.
 
-```
+```{r echo=FALSE, eval=FALSE}
 # The interpretation of the logistic regression’s coefficients may become a little more complicated when the chance is smaller than 1, that is, when the coefficient (\beta) is negative. One solution is to invert the coefficient (1/coefficient’s value), which makes the interpretation easier. For example, a coefficient of 0.11, when inverted, indicates that when the independent variable decreases by in one unit, an average increase of 9.10 is expected in the chance of the dependent variable occurring.
 
-Lastly, the analyst must validate the results observed with a subsample of
-its original dataset. This procedure gives the analysis more reliability,
-especially when working with small samples.
+#Lastly, the analyst must validate the results observed with a subsample of its original dataset. This procedure gives the analysis more reliability, especially when working with small samples.
 ```
 ---
-# Model prediction
+### .emphasis[Model prediction]
 
 To obtain the predicted probabilities we calculate:
 
