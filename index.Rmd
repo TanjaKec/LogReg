@@ -416,7 +416,7 @@ $$\hat{p}(x) =\frac{1}{1 + e^{-(-5.31 + 0.11*27)}}=\frac{1}{1 + e^{-(-2.34)}}=0.
 
 - Logistic regression does not assume a linear relationship between the dependent and independent variables: Logistic regression assumes linearity of independent variables and log odds of dependent variable; Homoscedasticity is not required: The error terms (residuals) do not need to be normally distributed.
 
-- The dependent variable must be a dichotomous ( 2 categories) for the binary logistic regression. In that case, logistic regression employs binomial probability theory in which there are only two values to predict: that probability (p) is 1 rather than 0, i.e. the event/person belongs to one group rather than the other.
+- The dependent variable must be dichotomous (2 categories) for the binary logistic regression. In that case, logistic regression employs binomial probability theory in which there are only two values to predict: that probability (p) is 1 rather than 0, i.e. the event/person belongs to one group rather than the other.
 
 - The logistic regression predicts group membership: Since logistic regression calculates the probability of success over the probability of failure, the results of the analysis are in the form of an odds ratio.
 
