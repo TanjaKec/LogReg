@@ -47,13 +47,17 @@ class: title-slide, center, bottom
 
 ### `r rmarkdown::metadata$author`
 
+---
+class: top, center
+background-image: url("images/trt.png")
+background-size: cover
+background-color: #ffffff
 
 ---
 class: top, center
 background-image: url("images/www.png")
 background-size: cover
 background-color: #ffffff
-
 
 ---
 class: top, center
