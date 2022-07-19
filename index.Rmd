@@ -114,7 +114,7 @@ Unlike a linear regression, in which coefficients are easy to interpret, the est
 
 The logarithm of the odds ratio is called the <span style="color:red">**logit**</span> and is simply the natural logarithm of the odds of being in that category.
 
-When observing the effect of a unit change in an explanatory variable on predicting the outcome of $Y$ we use the logit and we interpret it as the ratio of the odds of being classified in one category of the $Y$ for two different values of the $X_i$.
+When observing the effect of a unit change in an explanatory variable $X$ on predicting the outcome of $Y$ we use the logit and we interpret it as the ratio of the odds of being classified in one category of the $Y$ for two different values of the $X$.
 
 ---
 class: top, center
