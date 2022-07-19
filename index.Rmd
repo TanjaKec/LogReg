@@ -84,7 +84,7 @@ background-color: #ffffff
 ### .emphasis[The Premise of Logistic Regression]
 
 .pull-left[
-Logistic Regression is similar to OLS regression with the exception that it is **based on the independent variables prediction of** <span style="color:red">**probabilities, odds, and the logarithm of the odds**</span>**, for a categorical dependent variable $Y$**, rather than the prediction of specific values of a quantitative $Y$.
+Logistic Regression is similar to OLS regression with the exception that it is **based on the independent explanatory variables prediction of** <span style="color:red">**probabilities, odds, and the logarithm of the odds**</span>**, for a categorical dependent response variable $Y$**, rather than the prediction of specific values of a quantitative $Y$.
 ]
 
 .pull-right[
@@ -154,7 +154,7 @@ These are just a few of many examples where logistic regression methods are used
 ---
 ### .emphasis[How does it work?]
 
-Let us examine one such example using data from Hosmer, Lemeshow, and Sturdivant (2013) on the association between age and coronary disease, available from 👉 https://github.com/TanjaKec/mydata/tree/master/CHDAGE.
+Let us examine one such example using data from [Hosmer, Lemeshow, and Sturdivant (2013)](https://www.wiley.com/en-ie/Applied+Logistic+Regression,+3rd+Edition-p-9780470582473) on the association between age and coronary disease, available from 👉 https://github.com/TanjaKec/mydata/tree/master/CHDAGE.
 
 ```{r, echo=FALSE, fig.align='center'}
 knitr::include_graphics("images/CHDAGE.png")
