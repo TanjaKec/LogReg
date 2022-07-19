@@ -419,6 +419,16 @@ $$\hat{p}(x) =\frac{1}{1 + e^{-(-5.31 + 0.11*27)}}=\frac{1}{1 + e^{-(-2.34)}}=0.
 - The logistic regression predicts group membership: Since logistic regression calculates the probability of success over the probability of failure, the results of the analysis are in the form of an odds ratio.
 
 - Logistic regression forms a best fitting equation or function using the maximum likelihood (ML) method, which maximizes the probability of classifying the observed data into the appropriate category given the regression coefficients.
+---
+# Recommended reading till next time
+
+-  A.A.T. Fernandes, et al. _Read this paper if you want to learn logistic regression_. Rev. Sociol. Polit., v.28, n.74, 2020.
+available at <https://www.scielo.br/j/rsocp/a/RWjPthhKDYbFQYydbDr3MgH/?format=pdf&lang=en>
+
+- Fox J. _Applied Regression Analysis and Generalized Linear Models_; SAGE Publications, _3 edition_ 2015.
+
+- D. Hosmer Jr, S. Lemeshow & R. Sturdvanty _Applied logistic regression_; New York: John Wiley & Sons, 2013.
+
 
 ---
 class: freight-slide, center, middle, inverse
@@ -430,3 +440,4 @@ class: freight-slide, center, middle, inverse
 [`r icon::fa("twitter")` @Tatjana_Kec](https://twitter.com/Tatjana_Kec)
 
 [`r icon::fa("github")` @TanjaKec](https://github.com/TanjaKec)
+
